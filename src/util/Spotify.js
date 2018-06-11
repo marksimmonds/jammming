@@ -1,10 +1,12 @@
-const clientID = 'a9caee5f79874b0b9882ac7a0061ddab';
-//const redirectURI = 'http://localhost:3000';
-//const clientID = '0209a27dbd984e88b748082bf8ff7572';
-const redirectURI = 'http://simmojammming.surge.sh';
+// const clientID = 'a9caee5f79874b0b9882ac7a0061ddab';
+// const redirectURI = 'http://simmojammming.surge.sh';
+const clientID = '0209a27dbd984e88b748082bf8ff7572';
+const redirectURI = 'http://localhost:3000';
 
 let accessToken;
 let expiresIn;
+
+let apiURL = 'https://api.spotify.com/v1';
 
 const Spotify = {
 
@@ -29,7 +31,7 @@ const Spotify = {
         if (!accessToken) {
           Spotify.getAccessToken();
         }
-        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+        return fetch(`${apiURL}/search?type=track&q=${term}`, {
             headers: {Authorization: `Bearer ${accessToken}`}
         }).then(
             response => {return response.json();
@@ -52,14 +54,14 @@ const Spotify = {
         if (!accessToken) {
           Spotify.getAccessToken();
         }
-        return fetch('https://api.spotify.com/v1/me', {
+        return fetch(`${apiURL}/me`, {
             headers: {Authorization: `Bearer ${accessToken}`}
         }).then(
             response => {return response.json();
         }).then(
             jsonResponse => {
                 let userID = jsonResponse.id;
-                return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+                return fetch(`${apiURL}/users/${userID}/playlists`, {
                     headers: {Authorization: `Bearer ${accessToken}`},
                     method: 'POST',
                     body: JSON.stringify({name: playlistName})
@@ -68,7 +70,7 @@ const Spotify = {
                 }).then(
                     jsonResponse => {
                         let playlistID = jsonResponse.id;
-                        return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+                        return fetch(`${apiURL}/users/${userID}/playlists/${playlistID}/tracks`, {
                             headers: {Authorization: `Bearer ${accessToken}`},
                             method: 'POST',
                             body: JSON.stringify({uris: trackURIs})
