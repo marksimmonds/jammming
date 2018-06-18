@@ -27,12 +27,11 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="SearchBar">
+      <form className="SearchBar" onSubmit={this.search}>
         <input  placeholder="Enter A Song, Album, or Artist"
-                onChange={this.handleTermChange}
-                onKeyPress={this.handlePressEnter}/>
-        <a onClick={this.search}>SEARCH</a>
-      </div>
+                onChange={this.handleTermChange}/>
+        <input id="searchButton" type="submit" value="SEARCH"/>
+      </form>
     );
   }
 }

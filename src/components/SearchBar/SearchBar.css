@@ -21,7 +21,8 @@
   outline: none;
 }
 
-.SearchBar a {
+#searchButton {
+  color: #fff;
   cursor: pointer;
   width: 8.11rem;
   padding: .77rem 0;
@@ -32,6 +33,6 @@
   transition: background-color .25s;
 }
 
-.SearchBar a:hover {
+#searchButton:hover {
   background-color: rgba(108, 65, 233, .7);
 }
